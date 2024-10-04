@@ -45,10 +45,11 @@ public class CourseServiceTest {
 		courseService.addCourse(c);
 		long sizeAfter = courseService.countAllCourses();
 		assertEquals(1,sizeAfter-sizeBefore);
+		//rollback
 	}
 
 	@Test
-	//@Transactional
+	@Transactional
 	public void updateCourse() {
 		Course c = new Course("IMSADFII", "Using IMSADFII",4,530.45);
 		c.setCourseId(7800);
@@ -59,13 +60,13 @@ public class CourseServiceTest {
 	}
 
 	@Test
-	//@Transactional
+	@Transactional
 	public void deleteCourse8055WhichHasNoChildren() {
 		long sizeBefore = courseService.countAllCourses();
 		int id = 8055;
 		courseService.deleteCourse(id);
 		long sizeAfter = courseService.countAllCourses();
-		assertEquals(1,sizeBefore-sizeAfter);
+		assertEquals(-1,sizeAfter-sizeBefore);
 	}
 
 	

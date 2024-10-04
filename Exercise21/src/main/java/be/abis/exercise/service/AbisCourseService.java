@@ -4,6 +4,7 @@ import be.abis.exercise.model.Course;
 import be.abis.exercise.repository.CourseJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -45,8 +46,10 @@ public class AbisCourseService implements CourseService {
     }
 
     @Override
+    @Transactional
     public void deleteCourse(int id) {
         courseRepository.deleteById(id);
+        courseRepository.flush();
     }
 
     @Override
